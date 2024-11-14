@@ -18,6 +18,9 @@ jobs:
         run: docker build -t flaskapp:latest .
       - name: test
         run: echo "Running tests..."
+      - name: authenticate with GHCR
+        run: |
+          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
       - name: scan with Trivy
         uses: aquasecurity/trivy-action@master
         with:
@@ -28,9 +31,6 @@ jobs:
           vuln-type: 'os,library'
           severity: 'MEDIUM'
         continue-on-error: true
-      - name: authenticate with GHCR
-        run: |
-          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
       - name: tag the image
         run: |
           docker tag flaskapp:latest ghcr.io/${{ github.repository }}:latest
