@@ -30,6 +30,9 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'MEDIUM'
+        env:
+          TRIVY_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-db:latest
+          TRIVY_JAVA_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-java-db:1
         continue-on-error: true
       - name: tag the image
         run: |
