@@ -22,7 +22,7 @@ jobs:
         run: |
           docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
       - name: scan with Trivy
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.57.0
         with:
           image-ref: 'flaskapp:latest'
           format: 'json'
